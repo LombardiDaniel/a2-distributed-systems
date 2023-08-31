@@ -144,7 +144,7 @@ def main():
     CLIENT.connect(MQTT_BROKER, 1883)
 
     CLIENT.subscribe("#")
-    sleep(5)
+    sleep(15)
 
     for i in range(N_LINHAS_PROD):
         Thread(target=linha_producao, args=(i,)).start()
