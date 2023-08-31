@@ -1,0 +1,54 @@
+version: "3"
+
+services:
+  mqtt:
+    image: eclipse-mosquitto:1.6.12
+    restart: always
+    container_name: mqtt
+    expose:
+      - 1883
+
+  supplier:
+    build:
+      context: ./src/
+      dockerfile: supplier.Dockerfile
+    container_name: supplier
+    restart: always
+    environment:
+      MQTT_BROKER: mqtt
+    depends_on:
+      - mqtt
+
+  warehouse:
+    build:
+      context: ./src/
+      dockerfile: warehouse.Dockerfile
+    container_name: warehouse
+    restart: always
+    environment:
+      MQTT_BROKER: mqtt
+    depends_on:
+      - mqtt
+
+  factory:
+    build:
+      context: ./src/
+      dockerfile: factory.Dockerfile
+    # container_name: factory
+    deploy:
+      replicas: 2
+    restart: always
+    environment:
+      MQTT_BROKER: mqtt
+    depends_on:
+      - mqtt
+  # inspector:
+  #   build:
+  #     context: ./src/
+  #     dockerfile: inspector.Dockerfile
+  #   container_name: inspector
+  #   restart: always
+  #   environment:
+  #     MQTT_BROKER: mqtt
+  #   depends_on:
+  #     - mqtt

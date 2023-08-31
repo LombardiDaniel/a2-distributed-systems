@@ -1,0 +1,13 @@
+// REQUEST
+{
+  "src": "$CONTAINER_ID",
+  "partNum": 42
+}
+
+// RESPONSE
+{
+  "src": "$CONTAINER_ID",
+  "tgt": "$TGT_CONTAINER",
+  "partNum": 42,
+  "count": 98
+}
