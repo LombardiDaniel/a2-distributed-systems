@@ -27,9 +27,6 @@ RED_KANBAN_MARK = 500
 LOOP = asyncio.new_event_loop()
 asyncio.set_event_loop(LOOP)
 
-ENABLE_DELTA = 30
-START = datetime.datetime.now()
-
 
 def stock_monitoring_rountine():
     while True:
